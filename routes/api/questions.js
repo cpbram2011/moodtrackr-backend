@@ -4,6 +4,16 @@ const router = express.Router();
 
 const Question = require('../../models/question');
 
+
+
+router.get('/', (req, res) => {
+    Question.find()
+        .then(questions => {res.json(questions); res.send('hey')})
+        .catch(err =>
+            res.status(404).json({ notquestionfound: 'No question found' })
+        );
+});
+
 router.post('/', (req,res) => {
     const newQuestion = new Question({
         name: req.body.name,
