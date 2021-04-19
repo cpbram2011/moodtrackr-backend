@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
 
-const questions = require('./routes/api/questions')
+const journals = require('./routes/api/journals')
 const users = require('./routes/api/users');
 
 app.use(bodyParser.urlencoded({extended: false})); //postman permission
@@ -19,13 +19,10 @@ mongoose
     .connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
     .then( () => console.log('mongo connected'))
     .catch(err => console.log(err))
-
-
-
 app.get("/", (req, res) => {res.send('Test Success')});
 
 
-app.use('/api/questions', questions);
+app.use('/api/journals', journals);
 app.use('/api/users', users);
 
 

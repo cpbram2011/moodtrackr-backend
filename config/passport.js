@@ -3,8 +3,8 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const mongoose = require('mongoose');
 const keys = require("./keys");
 
-// const User = mongoose.model('users');
-// const { model } = require('mongoose');
+const User = mongoose.model('users');
+const { model } = require('mongoose');
 
 const options = {};
 options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -20,8 +20,8 @@ module.exports = passport => {
                 return done(null, false);
             })
             .catch(err => console.log(err));
-        // console.log(jwt_payload);
-        // done();
+        console.log(jwt_payload);
+        done();
     }));
 };
 
