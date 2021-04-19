@@ -11,6 +11,7 @@ const users = require('./routes/api/users');
 
 app.use(bodyParser.urlencoded({extended: false})); //postman permission
 app.use(bodyParser.json());
+
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
