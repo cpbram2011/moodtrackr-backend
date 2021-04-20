@@ -13,5 +13,6 @@ const JournalSchema = Schema({
 }, {timestamps: true
 });
 
+JournalSchema.index({name: 1, user_id: 1}, {unique: true})
 
 module.exports = Journal = mongoose.model('Journal', JournalSchema)

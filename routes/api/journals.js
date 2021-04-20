@@ -12,29 +12,49 @@ const Journal = require('../../models/Journal');
 
 
 
-// router.get('/', (req, res) => {
-//     // Journal.find()
-//     //     .then(journals => {res.json(journals); res.send('hey')})
-//     //     .catch(err =>
-//     //         res.status(404).json({ notquestionfound: 'No journal found' })
-//     //     );
-//     res.send('heyo')
-// });
+router.get('/', passport.authenticate('jwt', {session: false}),  (req, res) => {
+    Journal.find({user_id: req.user.id})
+        .then(journals => res.json(journals))
+        .catch(err =>
+            res.status(404).json({ notquestionfound: 'No journal found' })
+        );
+    
+});
 
 router.get('/',(req, res) => {
     res.json({
-        message: 'hey'
+        message: 'wat'
     });
 })
 
-router.post('/', (req,res) => {
-    const newJournal = new Journal({
-        name: req.body.name,
-        user_id: req.body.user_id,
+router.post('/new', (req,res) => {
+    Journal.findOne({ 
+        name: req.body.name, 
+        user_id: req.body.user_id 
     })
-    newJournal.save()
-        .then(journal => response.json(journal))
-        .catch(err => res.status(404).json(err))
+
+    
+    .then(journal => {
+        if (journal) {
+          const errors = {
+              journal: 'You already have a journal with that name.'
+          }
+          console.log(errors)
+          return res.status(400).json(errors);
+        } else {
+
+            const journal = new Journal({
+                name: req.body.name,
+                user_id: req.body.user_id,
+            })
+            
+            journal.save()
+            .then(() => res.json(journal))
+            .catch(err => res.status(404).json(err))
+        }
+    })
+
+
 });
 
 module.exports = router;

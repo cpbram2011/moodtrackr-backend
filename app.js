@@ -17,7 +17,7 @@ require('./config/passport')(passport);
 
 
 mongoose
-    .connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
+    .connect(db, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then( () => console.log('mongo connected'))
     .catch(err => console.log(err))
 app.get("/", (req, res) => {res.send('Test Success')});
