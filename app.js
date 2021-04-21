@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
 
-const journals = require('./routes/api/journals')
+const tracks = require('./routes/api/tracks')
 const users = require('./routes/api/users');
 
 app.use(bodyParser.urlencoded({extended: false})); //postman permission
@@ -23,7 +23,7 @@ mongoose
 app.get("/", (req, res) => {res.send('Test Success')});
 
 
-app.use('/api/journals', journals);
+app.use('/api/tracks', tracks);
 app.use('/api/users', users);
 
 

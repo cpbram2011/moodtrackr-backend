@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const JournalSchema = Schema({
+const TrackSchema = Schema({
     name: {
         type: String,
         required: true
@@ -13,6 +13,6 @@ const JournalSchema = Schema({
 }, {timestamps: true
 });
 
-JournalSchema.index({name: 1, user_id: 1}, {unique: true})
+TrackSchema.index({name: 1, user_id: 1}, {unique: true})
 
-module.exports = Journal = mongoose.model('Journal', JournalSchema)
+module.exports = Track = mongoose.model('Track', TrackSchema)

@@ -5,7 +5,7 @@ const keys = require('../../config/keys');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
-const Journal = require('../../models/Journal');
+const Track = require('../../models/Track');
 
 
 // const validateNewJournal = require('../../validation/newJournal');
@@ -13,43 +13,42 @@ const Journal = require('../../models/Journal');
 
 
 router.get('/', passport.authenticate('jwt', {session: false}),  (req, res) => {
-    Journal.find({user_id: req.user.id})
-        .then(journals => res.json(journals))
+    Track.find({user_id: req.user.id})
+        .then(tracks => {
+            if (tracks.length === 0) res.json({ tracks: 'No tracks found' });
+            else res.json(tracks)
+        })
         .catch(err =>
-            res.status(404).json({ notquestionfound: 'No journal found' })
+            res.status(404).json({ tracks: 'No journal found' })
         );
     
 });
 
-router.get('/',(req, res) => {
-    res.json({
-        message: 'wat'
-    });
-})
+
 
 router.post('/new', (req,res) => {
-    Journal.findOne({ 
+    Track.findOne({ 
         name: req.body.name, 
         user_id: req.body.user_id 
     })
 
     
-    .then(journal => {
-        if (journal) {
+    .then(track => {
+        if (track) {
           const errors = {
-              journal: 'You already have a journal with that name.'
+              track: 'You already have a journal with that name.'
           }
           console.log(errors)
           return res.status(400).json(errors);
         } else {
 
-            const journal = new Journal({
+            const track = new Track({
                 name: req.body.name,
                 user_id: req.body.user_id,
             })
             
-            journal.save()
-            .then(() => res.json(journal))
+            track.save()
+            .then(() => res.json(track))
             .catch(err => res.status(404).json(err))
         }
     })
