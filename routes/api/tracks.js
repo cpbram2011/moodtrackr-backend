@@ -15,11 +15,11 @@ const Track = require('../../models/Track');
 router.get('/', passport.authenticate('jwt', {session: false}),  (req, res) => {
     Track.find({user_id: req.user.id})
         .then(tracks => {
-            if (tracks.length === 0) res.json({ tracks: 'No tracks found' });
+            if (tracks.length === 0) res.json({ tracks: 'No tracks found???' });
             else res.json(tracks)
         })
         .catch(err =>
-            res.status(404).json({ tracks: 'No journal found' })
+            res.status(404).json({ tracks: 'No journal found???' })
         );
     
 });
@@ -55,5 +55,24 @@ router.post('/new', (req,res) => {
 
 
 });
+
+router.delete('/:id', (req, res) => {
+//     const userIndex = getUserIndex(req.params.userId)
+   
+//     if (userIndex === -1) return res.status(404).json({})
+   
+//     users.splice(userIndex, 1)
+//     res.json(users)
+//    })
+    Track.findByIdAndDelete(req.params.id, (err, track) => {
+        if (err){
+            return res.status(400).json(err)
+        }
+        else{
+            res.json(track)
+        }
+    });
+});
+
 
 module.exports = router;
