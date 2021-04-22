@@ -11,35 +11,35 @@ module.exports = function validateRegisterInput(data) {
 
   
   if (!Validator.isLength(data.username, { min: 2, max: 30 })) {
-    errors.username = 'Name must be more than 2 characters and less than 30';
+    errors.username = 'Username must be more than 2 characters and less than 30';
   }
 
   if (Validator.isEmpty(data.username)) {
-    errors.username = 'Do not forget your username!';
+    errors.username = 'Username cannot be empty';
   }
 
   if (Validator.isEmpty(data.email)) {
-    errors.email = 'DO NOT LEAVE THE EMAIL FIELD EMPTY!';
+    errors.email = 'Email cannot be empty';
   }
 
   if (!Validator.isEmail(data.email)) {
-    errors.email = 'People who misspell their email get 10 shocks';
+    errors.email = 'Invalid email address';
   }
 
   if (Validator.isEmpty(data.password)) {
-    errors.password = 'Do not forget your password!';
+    errors.password = 'Password cannot me empty';
   }
 
   if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
     errors.password = 'Password needs to be at least 6 characters';
   }
 
-  if (Validator.isEmpty(data.password2)) {
-    errors.password2 = 'Do not forget to confirm your password!';
-  }
+  // if (Validator.isEmpty(data.password2)) {
+  //   errors.password2 = 'Re-type password';
+  // } //TODO: validate empty password2 field
 
   if (!Validator.equals(data.password, data.password2)) {
-    errors.password2 = 'Passwords do not match.  Are you sure you\'re not crazy?';
+    errors.password2 = 'Passwords do not match';
   }
 
   return {
