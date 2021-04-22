@@ -10,6 +10,9 @@ const TrackSchema = Schema({
         type: String,
         required: true
     },
+    // entries: {
+    //     type: Array, // of obj_id => entryobject
+    // }
 }, {timestamps: true
 });
 
