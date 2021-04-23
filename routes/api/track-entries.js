@@ -23,6 +23,18 @@ router.get('/:id',  (req, res) => {
     
 });
 
+router.get('/week/:id',  (req, res) => {
+    var cutoff = new Date();
+    cutoff.setDate(cutoff.getDate()-7);
+    TrackEntry.find({track_id: req.params.id, date: {$gt: cutoff}})
+      .then(entries => {
+          res.json({track_id: req.params.id, entries})
+      })
+      .catch(err => {
+          res.status(404).json(err)
+      })
+});
+
 
 
 router.post('/', (req,res) => {
