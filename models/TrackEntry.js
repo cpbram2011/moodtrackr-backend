@@ -8,6 +8,9 @@ const TrackEntrySchema = Schema({
     rating: {
         type: Number
     },
+    complete: {
+        type: Boolean
+    },
     date: {
         type: Date,
         required: true

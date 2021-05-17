@@ -15,7 +15,7 @@ const Track = require('../../models/Track');
 router.get('/', passport.authenticate('jwt', {session: false}),  (req, res) => {
     Track.find({user_id: req.user.id})
         .then(tracks => {
-            if (tracks.length === 0) res.json({ tracks: 'No tracks found???' });
+            if (tracks.length === 0) res.json({ none: true });
             else res.json(tracks)
         })
         .catch(err =>
@@ -36,7 +36,7 @@ router.post('/new', (req,res) => {
     .then(track => {
         if (track) {
           const errors = {
-              track: 'You already have a journal with that name.'
+              track: 'You already have a track with that name.'
           }
           console.log(errors)
           return res.status(400).json(errors);
