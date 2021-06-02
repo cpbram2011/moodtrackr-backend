@@ -58,6 +58,7 @@ router.post('/', (req,res) => {
             const entry = new TrackEntry({
                 rating: req.body.rating,
                 text: req.body.text,
+                complete: req.body.complete,
                 track_id: req.body.track_id,
                 date: req.body.date
             })

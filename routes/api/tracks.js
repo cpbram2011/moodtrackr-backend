@@ -32,7 +32,6 @@ router.post('/new', (req,res) => {
         user_id: req.body.user_id 
     })
 
-    
     .then(track => {
         if (track) {
           const errors = {
