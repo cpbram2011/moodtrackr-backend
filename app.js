@@ -7,6 +7,7 @@ const passport = require('passport');
 const path = require('path');
 
 const tracks = require('./routes/api/tracks')
+const products = require('./routes/api/products')
 const users = require('./routes/api/users');
 const track_entries = require('./routes/api/track-entries');
 
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {res.send('Test Success')});
 app.use('/api/tracks', tracks);
 app.use('/api/users', users);
 app.use('/api/track-entries', track_entries);
+app.use('/api/products', products);
 
 
 
